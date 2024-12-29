@@ -12,7 +12,7 @@ const PopularMenu = () => {
         setMenu(response.data.filter((item) => item.category === "popular"))
       );
   }, []);
-  console.log(menu);
+
   return (
     <div>
       <SectionTitle

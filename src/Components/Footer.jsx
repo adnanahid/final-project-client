@@ -3,8 +3,8 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer bg-neutral text-neutral-content p-10 flex justify-around">
-        <aside>
+      <footer className="footer w-full h-[300px] bg-neutral text-neutral-content flex justify-between">
+        <aside className="bg-gray-800 w-1/2 h-full">
           <svg
             width="50"
             height="50"
