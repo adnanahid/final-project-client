@@ -34,9 +34,9 @@ const Testimonials = () => {
         slidesPerView={1}
         className="my-10"
       >
-        {reviews.map((review) => (
+        {reviews.map((review, idx) => (
           <SwiperSlide
-            key={review.id}
+            key={idx}
             className="text-center max-w-screen-lg px-24 pb-12"
           >
             <Rating

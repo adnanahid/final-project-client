@@ -1,18 +1,33 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import orderBanner from "../assets/shop/banner2.jpg";
 import Cover from "../SharedComponent/Cover";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../CustomHook/useMenu";
+import { useParams } from "react-router-dom";
 
 const OurShop = () => {
-  const [menu] = useMenu();
+  const [menu, loading] = useMenu([]);
+  const { category } = useParams();
+  const categories = ["dessert", "pizza", "salad", "soup", "drinks"];
+  const initialIndex = categories.indexOf(category)
+  const [tabIndex, setTabIndex] = useState(initialIndex);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen text-5xl font-bold flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
   const dessert = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
   const salad = menu.filter((item) => item.category === "salad");
   const soup = menu.filter((item) => item.category === "soup");
   const drinks = menu.filter((item) => item.category === "drinks");
+
   return (
     <div className="">
       <Helmet>
@@ -28,7 +43,7 @@ const OurShop = () => {
       ></Cover>
 
       <div className="text-center my-24">
-        <Tabs>
+        <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
           <div className="mb-12">
             <TabList>
               <Tab>DESSERT</Tab>
@@ -42,15 +57,20 @@ const OurShop = () => {
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
               {dessert.map((item) => (
-                <div className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center">
+                <div
+                  key={item._id}
+                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
+                >
                   <figure>
                     <img src={item.image} alt={item._id} />
                   </figure>
                   <div className="card-body">
                     <h2 className="text-2xl font-bold">{item.name}</h2>
                     <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">{item.price}$</p>
-                    <button className="btn border-0 border-b-4 border-gray-700">
+                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
+                      {item.price}$
+                    </p>
+                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
                       Add to cart
                     </button>
                   </div>
@@ -61,15 +81,20 @@ const OurShop = () => {
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
               {pizza.map((item) => (
-                <div className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center">
+                <div
+                  key={item._id}
+                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
+                >
                   <figure>
                     <img src={item.image} alt={item._id} />
                   </figure>
                   <div className="card-body">
                     <h2 className="text-2xl font-bold">{item.name}</h2>
                     <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">{item.price}$</p>
-                    <button className="btn border-0 border-b-4 border-gray-700">
+                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
+                      {item.price}$
+                    </p>
+                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
                       Add to cart
                     </button>
                   </div>
@@ -80,15 +105,20 @@ const OurShop = () => {
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
               {salad.map((item) => (
-                <div className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center">
+                <div
+                  key={item._id}
+                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
+                >
                   <figure>
                     <img src={item.image} alt={item._id} />
                   </figure>
                   <div className="card-body">
                     <h2 className="text-2xl font-bold">{item.name}</h2>
                     <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">{item.price}$</p>
-                    <button className="btn border-0 border-b-4 border-gray-700">
+                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
+                      {item.price}$
+                    </p>
+                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
                       Add to cart
                     </button>
                   </div>
@@ -99,15 +129,20 @@ const OurShop = () => {
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
               {soup.map((item) => (
-                <div className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center">
+                <div
+                  key={item._id}
+                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
+                >
                   <figure>
                     <img src={item.image} alt={item._id} />
                   </figure>
                   <div className="card-body">
                     <h2 className="text-2xl font-bold">{item.name}</h2>
                     <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">{item.price}$</p>
-                    <button className="btn border-0 border-b-4 border-gray-700">
+                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
+                      {item.price}$
+                    </p>
+                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
                       Add to cart
                     </button>
                   </div>
@@ -118,15 +153,20 @@ const OurShop = () => {
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
               {drinks.map((item) => (
-                <div className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center">
+                <div
+                  key={item._id}
+                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
+                >
                   <figure>
                     <img src={item.image} alt={item._id} />
                   </figure>
                   <div className="card-body">
                     <h2 className="text-2xl font-bold">{item.name}</h2>
                     <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">{item.price}$</p>
-                    <button className="btn border-0 border-b-4 border-gray-700">
+                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
+                      {item.price}$
+                    </p>
+                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
                       Add to cart
                     </button>
                   </div>

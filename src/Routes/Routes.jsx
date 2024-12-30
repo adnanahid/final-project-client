@@ -3,23 +3,25 @@ import BaseLayout from "../Layouts/BaseLayout";
 import Home from "../Pages/Home";
 import Menu from "../Pages/Menu";
 import OurShop from "../Pages/OurShop";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <BaseLayout></BaseLayout>,
+    element: <BaseLayout />,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home />,
       },
       {
         path: "/menu",
-        element: <Menu></Menu>,
+        element: <Menu />,
       },
       {
-        path: "/ourShop",
-        element: <OurShop></OurShop>,
+        path: "/ourShop/:category",
+        element: <OurShop />,
       },
     ],
   },
