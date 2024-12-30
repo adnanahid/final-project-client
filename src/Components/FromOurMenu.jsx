@@ -1,6 +1,6 @@
 import React from "react";
 import featuredImg from "../assets/home/featured.jpg";
-import SectionTitle from "./SectionTitle";
+import SectionTitle from "../SharedComponent/SectionTitle";
 const FromOurMenu = () => {
   return (
     <div
@@ -9,7 +9,6 @@ const FromOurMenu = () => {
         backgroundImage: `url(${featuredImg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-
       }}
     >
       {/* <img src={featuredImg} alt="" className=object-cover" /> */}

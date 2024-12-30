@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SectionTitle from "./SectionTitle";
 import { FaQuoteLeft } from "react-icons/fa";
 import axios from "axios";
 import { CiStar } from "react-icons/ci";
@@ -12,6 +11,7 @@ import { Pagination, Navigation } from "swiper/modules"; // Import Swiper module
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import SectionTitle from "../SharedComponent/SectionTitle";
 
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);

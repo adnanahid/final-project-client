@@ -8,7 +8,7 @@ import slider2 from "../assets/home/slide2.jpg";
 import slider3 from "../assets/home/slide3.jpg";
 import slider4 from "../assets/home/slide4.jpg";
 import slider5 from "../assets/home/slide5.jpg";
-import SectionTitle from "./SectionTitle";
+import SectionTitle from "../SharedComponent/SectionTitle";
 
 const Category = () => {
   return (

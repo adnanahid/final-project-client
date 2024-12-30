@@ -3,14 +3,11 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const navOptions = (
-    <>
-      <li>
-        <Link to="/">Home</Link>
-      </li>
-      <li>
-        <Link to="/menu">Our Menu</Link>
-      </li>
-    </>
+    <div className="space-x-5">
+      <Link to="/">Home</Link>
+      <Link to="/menu">Our Menu</Link>
+      <Link to="/ourShop">Our Shop</Link>
+    </div>
   );
   return (
     <div className="navbar z-10 fixed bg-black opacity-50 text-white">
@@ -32,17 +29,17 @@ const Navbar = () => {
               />
             </svg>
           </div>
-          <ul
+          <div
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             {navOptions}
-          </ul>
+          </div>
         </div>
         <a className="btn btn-ghost text-xl">Bistro Boss</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+        <div className="menu menu-horizontal">{navOptions}</div>
       </div>
       <div className="navbar-end">
         <a className="btn">Button</a>
