@@ -12,7 +12,7 @@ import SectionTitle from "./SectionTitle";
 
 const Category = () => {
   return (
-    <div className=" my-16">
+    <div className="my-16">
       <SectionTitle
         subTitle={"---From 11:00am to 10:00pm---"}
         title={"Order Online"}
@@ -27,23 +27,23 @@ const Category = () => {
         modules={[Pagination]}
         className="mySwiper my-6 max-w-screen-lg mx-auto"
       >
-        <SwiperSlide>
+        <SwiperSlide className="mb-16">
           <img src={slider1} alt="" />
           <h1 className="-mt-16 text-3xl text-white text-center">SALAD</h1>
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide className="mb-16">
           <img src={slider2} alt="" />
           <h1 className="-mt-16 text-3xl text-white text-center">SALAD</h1>
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide className="mb-16">
           <img src={slider3} alt="" />
           <h1 className="-mt-16 text-3xl text-white text-center">SALAD</h1>
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide className="mb-16">
           <img src={slider4} alt="" />
           <h1 className="-mt-16 text-3xl text-white text-center">SALAD</h1>
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide className="mb-16">
           <img src={slider5} alt="" />
           <h1 className="-mt-16 text-3xl text-white text-center">SALAD</h1>
         </SwiperSlide>

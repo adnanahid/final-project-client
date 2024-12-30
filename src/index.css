@@ -8,3 +8,11 @@
   font-family: "Playfair Display", serif;
   font-style: normal;
 }
+
+html {
+  overflow-y: scroll;
+}
+
+.active {
+  font-size: 32px;
+}
