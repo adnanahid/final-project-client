@@ -41,8 +41,8 @@ const Menu = () => {
       <MenuCategory category="offered" />
       <div className="text-center mb-12">
         <Link
-          to="/ourShop"
-          className="btn bg-blue-400 text-white bg-transparent border-0 border-b-4 border-r-4 border-black"
+          to="/ourShop/dessert"
+          className="btn bg-gray-600 text-white bg-transparent border-0 border-b-4 border-r-4 border-black"
         >
           Order Your Favorite Food
         </Link>
@@ -60,7 +60,7 @@ const Menu = () => {
           <div className="text-center mb-12">
             <Link
               to={`/ourShop/${section.category}`}
-              className="btn bg-blue-400 text-white bg-transparent border-0 border-b-4 border-r-4 border-black"
+              className="btn bg-gray-600 text-white bg-transparent border-0 border-b-4 border-r-4 border-black"
             >
               Order Your Favorite Food
             </Link>

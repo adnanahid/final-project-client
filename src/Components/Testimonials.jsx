@@ -18,7 +18,7 @@ const Testimonials = () => {
 
   useEffect(() => {
     axios
-      .get("/review.json") // Adjusted path to the public directory
+      .get("http://localhost:5000/review") // Adjusted path to the public directory
       .then((response) => setReviews(response.data))
       .catch((error) => console.error("Error fetching reviews:", error));
   }, []);
