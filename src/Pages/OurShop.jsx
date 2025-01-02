@@ -16,8 +16,8 @@ const OurShop = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen text-5xl font-bold flex items-center justify-center">
-        Loading...
+      <div className="min-h-screenflex items-center justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
       </div>
     );
   }

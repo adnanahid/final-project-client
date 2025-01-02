@@ -6,7 +6,8 @@ import BistroBoss from "../Components/BistroBoss";
 import FromOurMenu from "../Components/FromOurMenu";
 import Testimonials from "../Components/Testimonials";
 import ContactUs from "../Components/ContactUs";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
+import { Fade } from "react-awesome-reveal";
 
 const Home = () => {
   return (
@@ -15,13 +16,16 @@ const Home = () => {
         <title>Bistro Boss | home</title>
         <link rel="canonical" href="https://www.tacobell.com/" />
       </Helmet>
-      <Banner></Banner>
-      <Category></Category>
-      <PopularMenu></PopularMenu>
-      <BistroBoss></BistroBoss>
-      <FromOurMenu></FromOurMenu>
-      <ContactUs></ContactUs>
-      <Testimonials></Testimonials>
+
+      <Fade cascade delay={50} duration={300}>
+        <Banner></Banner>
+        <Category></Category>
+        <PopularMenu></PopularMenu>
+        <BistroBoss></BistroBoss>
+        <FromOurMenu></FromOurMenu>
+        <ContactUs></ContactUs>
+        <Testimonials></Testimonials>
+      </Fade>
     </div>
   );
 };
