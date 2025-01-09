@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import {
   LoadCanvasTemplate,
-  loadCaptchaEnginge,
+  // loadCaptchaEnginge,
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -9,44 +9,59 @@ import Lottie from "lottie-react";
 import loginAnimation from "../assets/LottieAnimation/LoginAnimation - 1735711505719.json";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { axiosPublic } from "../CustomHook/useAxiosPublic";
 
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, setUser, googleLogin, createUser } = useContext(AuthContext);
+  const { user, setUser, googleLogin, loginUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+  // useEffect(() => {
+  //   loadCaptchaEnginge(6);
+  // }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    const userCaptchaValue = event.target.captcha.value;
+    // const userCaptchaValue = event.target.captcha.value;
 
-    if (validateCaptcha(userCaptchaValue)) {
-      createUser(email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          setUser(user);
-          toast.success("login Successful");
-          navigate(location?.state ? location.state : "/");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log(errorMessage);
-          toast.error(errorMessage);
+    // if (validateCaptcha(userCaptchaValue)) {
+    loginUser(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        axiosPublic.post("/users", user).then((res) => {
+          if (res.data.insertedId) {
+            console.log("user added");
+          }
         });
-    } else {
-      toast.error("Captcha Does Not Match");
-    }
+        setUser(user);
+        toast.success("login Successful");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        toast.error(errorMessage);
+      });
+    // } else {
+    //   toast.error("Captcha Does Not Match");
+    // }
   };
 
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
+        const userInfo = {
+          name: result.user.displayName,
+          email: result.user.email,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          if (res.data.insertedId) {
+            console.log("user added");
+          }
+        });
         setUser(result.user);
         toast.success("successful login");
         navigate(location?.state ? location.state : "/");
@@ -95,7 +110,7 @@ const Login = () => {
             />
           </div>
           {/* Captcha */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label htmlFor="captcha" className="block text-gray-700">
               Captcha
             </label>
@@ -109,7 +124,7 @@ const Login = () => {
               placeholder="Type here"
               className="w-full mt-2 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-          </div>
+          </div> */}
           {/* Sign In Button */}
           <div className="mb-4">
             <button

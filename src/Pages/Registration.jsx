@@ -5,6 +5,7 @@ import loginAnimation from "../assets/LottieAnimation/LoginAnimation - 173571150
 import Lottie from "lottie-react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { axiosPublic } from "../CustomHook/useAxiosPublic";
 const SignUpPage = () => {
   const { createUser, setUser, updateUserProfile } = useContext(AuthContext);
   const {
@@ -19,7 +20,12 @@ const SignUpPage = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         updateUserProfile(data.name, data.photoURL).then(() => {
-          console.log("update successful");
+          const userInfo = { name: data.name, email: data.email };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added");
+            }
+          });
         });
         setUser(user);
         toast.success(`Welcome, ${data.name}! Your account has been created.`);

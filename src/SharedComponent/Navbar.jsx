@@ -1,18 +1,20 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import toast from "react-hot-toast";
+import { CiShoppingCart } from "react-icons/ci";
+import useCart from "../CustomHook/useCart";
 
 const Navbar = () => {
   const { user, userLogout } = useContext(AuthContext);
-
+  const [cart] = useCart();
   const handleLogout = () => {
     userLogout();
     toast.success("signout successful");
   };
 
   return (
-    <div className="navbar z-10 fixed bg-black opacity-50 text-white">
+    <div className="navbar z-10 fixed">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -74,9 +76,23 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <div className="flex items-center justify-center gap-5">
+            <Link to="/dashboard/my-profile">
+              <div className="indicator">
+                <span className="indicator-item badge badge-secondary">
+                  {cart.length}
+                </span>
+                <button className="">
+                  <CiShoppingCart className="w-6 h-10" />
+                </button>
+              </div>
+            </Link>
             <button onClick={handleLogout}>Logout</button>
             <div className="avatar w-12">
-              <img className="rounded-full" referrerPolicy="no-referrer" src={user?.photoURL} />
+              <img
+                className="rounded-full"
+                referrerPolicy="no-referrer"
+                src={user?.photoURL}
+              />
             </div>
           </div>
         ) : (

@@ -6,12 +6,13 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../CustomHook/useMenu";
 import { useParams } from "react-router-dom";
+import FoodCard from "../SharedComponent/FoodCard";
 
 const OurShop = () => {
   const [menu, loading] = useMenu([]);
   const { category } = useParams();
   const categories = ["dessert", "pizza", "salad", "soup", "drinks"];
-  const initialIndex = categories.indexOf(category)
+  const initialIndex = categories.indexOf(category);
   const [tabIndex, setTabIndex] = useState(initialIndex);
 
   if (loading) {
@@ -56,121 +57,36 @@ const OurShop = () => {
 
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
-              {dessert.map((item) => (
-                <div
-                  key={item._id}
-                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
-                >
-                  <figure>
-                    <img src={item.image} alt={item._id} />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="text-2xl font-bold">{item.name}</h2>
-                    <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
-                      {item.price}$
-                    </p>
-                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
+              {dessert.map((item, idx) => (
+                <FoodCard key={idx} item={item}></FoodCard>
               ))}
             </div>
           </TabPanel>
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
-              {pizza.map((item) => (
-                <div
-                  key={item._id}
-                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
-                >
-                  <figure>
-                    <img src={item.image} alt={item._id} />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="text-2xl font-bold">{item.name}</h2>
-                    <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
-                      {item.price}$
-                    </p>
-                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
+              {pizza.map((item, idx) => (
+                <FoodCard key={idx} item={item}></FoodCard>
               ))}
             </div>
           </TabPanel>
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
-              {salad.map((item) => (
-                <div
-                  key={item._id}
-                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
-                >
-                  <figure>
-                    <img src={item.image} alt={item._id} />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="text-2xl font-bold">{item.name}</h2>
-                    <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
-                      {item.price}$
-                    </p>
-                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
+              {salad.map((item, idx) => (
+                <FoodCard key={idx} item={item}></FoodCard>
               ))}
             </div>
           </TabPanel>
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
-              {soup.map((item) => (
-                <div
-                  key={item._id}
-                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
-                >
-                  <figure>
-                    <img src={item.image} alt={item._id} />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="text-2xl font-bold">{item.name}</h2>
-                    <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
-                      {item.price}$
-                    </p>
-                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
+              {soup.map((item, idx) => (
+                <FoodCard key={idx} item={item}></FoodCard>
               ))}
             </div>
           </TabPanel>
           <TabPanel>
             <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 relative">
-              {drinks.map((item) => (
-                <div
-                  key={item._id}
-                  className="card card-compact bg-base-100 w-96 shadow-xl mb-6 text-center"
-                >
-                  <figure>
-                    <img src={item.image} alt={item._id} />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="text-2xl font-bold">{item.name}</h2>
-                    <p>{item.recipe}</p>
-                    <p className="absolute text-lg top-5 right-5 bg-slate-900 text-white px-4 rounded-3xl">
-                      {item.price}$
-                    </p>
-                    <button className="btn bg-blue-500 text-white bg-transparent border-0 border-b-4 border-r-4 border-black">
-                      Add to cart
-                    </button>
-                  </div>
-                </div>
+              {drinks.map((item, idx) => (
+                <FoodCard key={idx} item={item}></FoodCard>
               ))}
             </div>
           </TabPanel>
