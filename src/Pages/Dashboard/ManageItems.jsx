@@ -4,6 +4,7 @@ import useMenu from "../../CustomHook/useMenu";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../CustomHook/useAxiosSecure";
 import { FaPen, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
   const [menu, refetch] = useMenu();
@@ -68,9 +69,11 @@ const ManageItems = () => {
                   <td>{item.description}</td>
                   <td>${item.price}</td>
                   <td>
-                    <button className="btn btn-ghost btn-xs text-blue-500">
-                      <FaPen />
-                    </button>
+                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                      <button className="btn btn-ghost btn-xs text-blue-500">
+                        <FaPen />
+                      </button>
+                    </Link>
                   </td>
                   <td>
                     <button
@@ -95,10 +98,7 @@ const ManageItems = () => {
               Are you sure you want to delete this item?
             </h3>
             <div className="flex gap-3 mt-4">
-              <button
-                className="btn btn-error btn-sm"
-                onClick={confirmDelete}
-              >
+              <button className="btn btn-error btn-sm" onClick={confirmDelete}>
                 Yes, Delete
               </button>
               <button

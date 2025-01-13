@@ -14,6 +14,14 @@ import AllUsers from "../Pages/Dashboard/AllUsers";
 import AddItems from "../Pages/Dashboard/AddItems";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../Pages/Dashboard/ManageItems";
+import UpdateItem from "../Pages/Dashboard/UpdateItem";
+const fetchMenuInfo = async (params) => {
+  const response = await fetch(`http://localhost:5000/menu/${params.id}`);
+  const data = await response.json();
+  return data;
+  // console.log(data);
+  // console.log(params);
+};
 
 export const router = createBrowserRouter([
   {
@@ -90,6 +98,11 @@ export const router = createBrowserRouter([
             <ManageItems />
           </AdminRoute>
         ),
+      },
+      {
+        path: "/dashboard/updateItem/:id",
+        element: <UpdateItem />,
+        loader: ({ params }) => fetchMenuInfo(params),
       },
     ],
   },
