@@ -13,12 +13,13 @@ import MyProfile from "../Pages/Dashboard/MyProfile";
 import AllUsers from "../Pages/Dashboard/AllUsers";
 import AddItems from "../Pages/Dashboard/AddItems";
 import AdminRoute from "./AdminRoute";
+import ManageItems from "../Pages/Dashboard/ManageItems";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <BaseLayout />,
-    errorElement: <ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -48,37 +49,29 @@ export const router = createBrowserRouter([
         path: "/registration",
         element: <Registration />,
       },
-      {
-        path: "/ourShop/:category",
-        element: <OurShop />,
-      },
     ],
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoutes>
+        <Dashboard />
+      </PrivateRoutes>
+    ),
     children: [
       {
-        path: "/dashboard/cart",
-        element: (
-          <PrivateRoutes>
-            <Cart></Cart>,
-          </PrivateRoutes>
-        ),
+        path: "/dashboard",
+        element: <MyProfile />,
       },
       {
-        path: "/dashboard/my-profile",
-        element: (
-          <PrivateRoutes>
-            <MyProfile></MyProfile>,
-          </PrivateRoutes>
-        ),
+        path: "/dashboard/cart",
+        element: <Cart />,
       },
       {
         path: "/dashboard/all-users",
         element: (
           <AdminRoute>
-            <AllUsers></AllUsers>
+            <AllUsers />
           </AdminRoute>
         ),
       },
@@ -86,7 +79,15 @@ export const router = createBrowserRouter([
         path: "/dashboard/addItems",
         element: (
           <AdminRoute>
-            <AddItems></AddItems>
+            <AddItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageItems",
+        element: (
+          <AdminRoute>
+            <ManageItems />
           </AdminRoute>
         ),
       },

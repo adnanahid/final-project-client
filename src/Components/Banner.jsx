@@ -10,34 +10,34 @@ import img6 from "../assets/home/06.png";
 
 const Banner = () => {
   return (
-    <div className="w-full max-h-screen overflow-hidden">
-      <Carousel className="h-full">
+    <div className="w-full h-[600px] overflow-hidden">
+      <Carousel className="h-[600px]">
         <div>
           <img
             src={img1}
             alt="Slide 1"
-            // className="w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
         <div>
           <img
             src={img2}
             alt="Slide 2"
-            // className="w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
         <div>
           <img
             src={img3}
             alt="Slide 3"
-            // className="w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
         <div>
           <img
             src={img4}
             alt="Slide 4"
-            // className="w-full h-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
         <div>
@@ -51,7 +51,7 @@ const Banner = () => {
           <img
             src={img6}
             alt="Slide 6"
-            className="w-full h-full object-cover"
+            className="w-full h-[600px] object-cover"
           />
         </div>
       </Carousel>

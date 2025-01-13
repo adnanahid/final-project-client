@@ -76,10 +76,10 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <div className="flex items-center justify-center gap-5">
-            <Link to="/dashboard/my-profile">
+            <Link to="/dashboard/cart">
               <div className="indicator">
                 <span className="indicator-item badge badge-secondary">
-                  {cart.length}
+                  {cart?.length}
                 </span>
                 <button className="">
                   <CiShoppingCart className="w-6 h-10" />
