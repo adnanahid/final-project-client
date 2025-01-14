@@ -3,34 +3,39 @@ import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../CustomHook/useAxiosSecure";
 import useCart from "../../CustomHook/useCart";
 import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
-  const [cart] = useCart();
+  const [cart, refetch] = useCart();
   const totalPrice = parseFloat(
     cart.reduce((total, item) => total + item.price, 0).toFixed(2)
   );
 
   useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent", { price: totalPrice })
-      .then((res) => {
-        setClientSecret(res.data.clientSecret);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Failed to create payment intent:", error);
-        setError("Failed to initialize payment. Please try again.");
-        setIsLoading(false);
-      });
+    if (totalPrice > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Failed to create payment intent:", error);
+          setError("Failed to initialize payment. Please try again.");
+          setIsLoading(false);
+        });
+    }
   }, [axiosSecure, totalPrice]);
 
   const handleSubmit = async (e) => {
@@ -85,11 +90,15 @@ const CheckoutForm = () => {
           email: user.email,
           price: totalPrice,
           date: new Date(),
-          cartId: cart.map((item) => item._id),
-          menuId: cart.map((item) => item.menuId),
+          cartIds: cart.map((item) => item._id),
+          menuIds: cart.map((item) => item.menuId),
+          status: "pending",
         };
         const res = await axiosSecure.post("/payments", payment);
-        console.log("payments", res);
+        console.log("payments", res.data);
+        refetch();
+        toast.success("payment successful");
+        navigate("/dashboard/pay-history");
       }
     }
   };
@@ -116,7 +125,6 @@ const CheckoutForm = () => {
           },
         }}
       />
-      {error && <p className="text-red-600">{error}</p>}
       <button type="submit" disabled={!stripe || !clientSecret || isProcessing}>
         {isProcessing ? "Processing..." : "Pay"}
       </button>

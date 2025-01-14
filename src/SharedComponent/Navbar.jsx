@@ -4,9 +4,11 @@ import { AuthContext } from "../Provider/AuthProvider";
 import toast from "react-hot-toast";
 import { CiShoppingCart } from "react-icons/ci";
 import useCart from "../CustomHook/useCart";
+import useAdmin from "../CustomHook/useAdmin";
 
 const Navbar = () => {
   const { user, userLogout } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
   const handleLogout = () => {
     userLogout();
@@ -76,16 +78,31 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <div className="flex items-center justify-center gap-5">
-            <Link to="/dashboard/cart">
-              <div className="indicator">
-                <span className="indicator-item badge badge-secondary">
-                  {cart?.length}
-                </span>
-                <button className="">
-                  <CiShoppingCart className="w-6 h-10" />
-                </button>
-              </div>
-            </Link>
+            {user && isAdmin && (
+              <Link to="/dashboard/admin-home">
+                <div className="indicator">
+                  <span className="indicator-item badge badge-secondary">
+                    {cart?.length}
+                  </span>
+                  <button className="">
+                    <CiShoppingCart className="w-6 h-10" />
+                  </button>
+                </div>
+              </Link>
+            )}
+            {user && !isAdmin && (
+              <Link to="/dashboard/user-home">
+                <div className="indicator">
+                  <span className="indicator-item badge badge-secondary">
+                    {cart?.length}
+                  </span>
+                  <button className="">
+                    <CiShoppingCart className="w-6 h-10" />
+                  </button>
+                </div>
+              </Link>
+            )}
+
             <button onClick={handleLogout}>Logout</button>
             <div className="avatar w-12">
               <img

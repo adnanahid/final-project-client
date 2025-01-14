@@ -16,6 +16,9 @@ import AdminRoute from "./AdminRoute";
 import ManageItems from "../Pages/Dashboard/ManageItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem";
 import Payment from "../Pages/Dashboard/Payment";
+import PayHistory from "../Pages/Dashboard/PayHistory";
+import AdminHome from "../Pages/Dashboard/AdminHome";
+import UserHome from "../Pages/Dashboard/UserHome";
 // const fetchMenuInfo = async (params) => {
 //   const response = await fetch(`http://localhost:5000/menu/${params.id}`);
 //   const data = await response.json();
@@ -70,10 +73,10 @@ export const router = createBrowserRouter([
     children: [
       //normalUserRoute
       {
-        path: "/dashboard",
+        path: "/dashboard/user-home",
         element: (
           <PrivateRoutes>
-            <MyProfile />
+            <UserHome />
           </PrivateRoutes>
         ),
       },
@@ -93,7 +96,23 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+      {
+        path: "/dashboard/pay-history",
+        element: (
+          <PrivateRoutes>
+            <PayHistory />
+          </PrivateRoutes>
+        ),
+      },
       //Admin only Route
+      {
+        path: "/dashboard/admin-home",
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
+      },
       {
         path: "/dashboard/all-users",
         element: (

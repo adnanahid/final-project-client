@@ -13,9 +13,11 @@ import {
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../CustomHook/useAdmin";
+import useCart from "../CustomHook/useCart";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
+  const [cart, refetch] = useCart();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -39,7 +41,7 @@ const Dashboard = () => {
           {isAdmin ? (
             <>
               <li>
-                <NavLink to="/dashboard/adminHome">
+                <NavLink to="/dashboard/admin-home">
                   <FaHome></FaHome>
                   Admin Home
                 </NavLink>
@@ -72,7 +74,7 @@ const Dashboard = () => {
           ) : (
             <>
               <li>
-                <NavLink to="/dashboard/userHome">
+                <NavLink to="/dashboard/user-home">
                   <FaHome></FaHome>
                   User Home
                 </NavLink>
@@ -121,7 +123,13 @@ const Dashboard = () => {
           <li>
             <NavLink to="/dashboard/cart">
               <FaShoppingCart></FaShoppingCart>
-              My Cart
+              My Cart({cart.length})
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/pay-history">
+              <FaList></FaList>
+              Pay History
             </NavLink>
           </li>
         </ul>
