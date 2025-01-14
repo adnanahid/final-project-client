@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import FoodCard from "../SharedComponent/FoodCard";
 
 const OurShop = () => {
-  const [menu, loading] = useMenu([]);
+  const [menu, _, loading] = useMenu([]);
   const { category } = useParams();
   const categories = ["dessert", "pizza", "salad", "soup", "drinks"];
   const initialIndex = categories.indexOf(category);
@@ -17,7 +17,7 @@ const OurShop = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screenflex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <span className="loading loading-spinner loading-lg"></span>
       </div>
     );

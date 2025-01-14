@@ -2,7 +2,7 @@ import MenuItem from "./MenuItem";
 import useMenu from "../CustomHook/useMenu";
 
 const MenuCategory = ({ category }) => {
-  const [menu, loading] = useMenu();
+  const [menu, _, loading] = useMenu();
   const filterData = menu.filter((item) => item.category === `${category}`);
 
   if (loading) {

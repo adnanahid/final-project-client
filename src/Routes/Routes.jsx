@@ -15,13 +15,14 @@ import AddItems from "../Pages/Dashboard/AddItems";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../Pages/Dashboard/ManageItems";
 import UpdateItem from "../Pages/Dashboard/UpdateItem";
-const fetchMenuInfo = async (params) => {
-  const response = await fetch(`http://localhost:5000/menu/${params.id}`);
-  const data = await response.json();
-  return data;
-  // console.log(data);
-  // console.log(params);
-};
+import Payment from "../Pages/Dashboard/Payment";
+// const fetchMenuInfo = async (params) => {
+//   const response = await fetch(`http://localhost:5000/menu/${params.id}`);
+//   const data = await response.json();
+//   return data;
+//   // console.log(data);
+//   // console.log(params);
+// };
 
 export const router = createBrowserRouter([
   {
@@ -67,14 +68,32 @@ export const router = createBrowserRouter([
       </PrivateRoutes>
     ),
     children: [
+      //normalUserRoute
       {
         path: "/dashboard",
-        element: <MyProfile />,
+        element: (
+          <PrivateRoutes>
+            <MyProfile />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/cart",
-        element: <Cart />,
+        element: (
+          <PrivateRoutes>
+            <Cart />
+          </PrivateRoutes>
+        ),
       },
+      {
+        path: "/dashboard/payment",
+        element: (
+          <PrivateRoutes>
+            <Payment />
+          </PrivateRoutes>
+        ),
+      },
+      //Admin only Route
       {
         path: "/dashboard/all-users",
         element: (
@@ -101,8 +120,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/updateItem/:id",
-        element: <UpdateItem />,
-        loader: ({ params }) => fetchMenuInfo(params),
+        element: (
+          <AdminRoute>
+            <UpdateItem />
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
       },
     ],
   },

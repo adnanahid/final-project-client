@@ -2,6 +2,7 @@ import React from "react";
 import useCart from "../../CustomHook/useCart";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -59,7 +60,12 @@ const Cart = () => {
         <h2 className="text-4xl font-bold">
           Total Price: ${totalPrice.toFixed(2)}
         </h2>
-        <button className="btn w-24 text-lg bg-gray-800 text-white">Pay</button>
+        <button
+          disabled={!cart.length}
+          className="btn w-24 text-lg bg-gray-800 text-white"
+        >
+          <Link to="/dashboard/payment">Pay</Link>
+        </button>
       </div>
 
       {/* Table Section */}

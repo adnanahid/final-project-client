@@ -7,7 +7,7 @@ const useMenu = () => {
   const axiosPublic = useAxiosPublic();
   const {
     data: menu = [],
-    isPending: loading,
+    isLoading: loading,
     refetch,
   } = useQuery({
     queryKey: ["menu"],

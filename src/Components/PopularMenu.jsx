@@ -3,7 +3,7 @@ import MenuItem from "../SharedComponent/MenuItem";
 import useMenu from "../CustomHook/useMenu";
 
 const PopularMenu = () => {
-  const [menu, loading] = useMenu();
+  const [menu, _, loading] = useMenu();
 
   // Ensure menu is an array before filtering
   const popular = menu.filter((item) => item.category === "popular");
@@ -11,7 +11,7 @@ const PopularMenu = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-       <span className="loading loading-spinner loading-lg"></span>
+        <span className="loading loading-spinner loading-lg"></span>
       </div>
     );
   }
